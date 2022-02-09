@@ -103,7 +103,7 @@ def add_part_element(bbox,num,sz):
     part = ET.Element('part')
     part.set('name',str(int(num)))
     part.set('x',str(int(bbox[0])))
-    part.set('y',str(int(sz[0]-bbox[1])))
+    part.set('y',str(int(bbox[1])))
     return part
 
 def add_bbox_element(bbox,sz,padding=0):
