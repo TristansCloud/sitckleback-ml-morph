@@ -38,7 +38,7 @@ def read_csv(input):
     
     for i, ln in enumerate(csv):
         if i > 0:
-            im.append(ln.split(',')[0])
+            im.append(ln.split(',')[0].strip('"'))
             coord_vec=ln.split(',')[1:]
             coords_mat = np.reshape(coord_vec, (int(len(coord_vec)/2),2))
             coords = np.array(coords_mat, dtype=float)
@@ -235,8 +235,8 @@ def split_train_test(input_dir):
             os.mkdir(split)
         else:
             print("Warning: the folder {} already exists. It's being replaced".format(split))
-            shutil.rmtree(split)
-            os.mkdir(split)
+            shutil.rmtree(split) # comment out to avoid deleting train and test if they are already there
+            os.mkdir(split) # commentout to avoid deleting train and test if they are already there
 
         for filename in filenames[split]:
             basename=os.path.basename(filename)
@@ -262,7 +262,7 @@ def image_prep(file, name, dir_path):
         print('File {} was ignored'.format(file))
     else:
         file_sz= [img.shape[0],img.shape[1]]
-        cv2.imwrite(os.path.join(dir_path,name), img)
+        cv2.imwrite(os.path.join(dir_path,name), img) # comment out to avoid writing the files to train and test if they are already there
     return file_sz
 
 
